@@ -15,6 +15,7 @@ public class Item {
     public String name;
     public String description;
     public String category;
+    public String price;
     
       public Item() {
     }
@@ -56,6 +57,14 @@ public class Item {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+    
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price= price;
     }
 
 }

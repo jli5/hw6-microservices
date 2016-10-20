@@ -5,7 +5,9 @@ import static com.rabbitmq.tools.jsonrpc.JsonRpcServer.response;
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.String;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import static org.apache.commons.lang3.Range.is;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,20 +34,50 @@ public class CommerceService {
     public List<Item> itemCommerce() {
         
         Item[] temp=restTemplate.getForObject("http://item/items",Item[].class);
+        
+        Map<String, String> tempprice=restTemplate.getForObject("http://price/prices", Map.class);     
+        for(int i=0;i<temp.length;i++){
+           Long itemid=temp[i].id;
+           String price=tempprice.get(itemid.toString());
+           temp[i].setPrice(price);
+           
+        }
              
-//          ResponseEntity<String> response =restTemplate.getForEntity("http://localhost:8080/items", String.class);
-//          String body = response.getBody();
-//          return body;        
-//         assertThat(response.getStatusCode(), is(HttpStatus.OK));
-
+   
         return Arrays.asList(temp);
     }
+    
+//     @HystrixCommand(fallbackMethod = "fallbackPrice")
+    public Map priceCommerce() {
+             
+         Map<String, String> tempprice=restTemplate.getForObject("http://price/prices", Map.class);
+        
+        return tempprice;
+    }
+    
+
+   
+//     @HystrixCommand(fallbackMethod = "fallbackPriceItem")
+    
+    public Map priceitemCommerce(String itemdId) {
+    Map<String, String> temppriceitem=restTemplate.getForObject("http://price/price"+itemdId, Map.class);
+    return temppriceitem;
+  }
     
     
     
      @HystrixCommand(fallbackMethod = "fallbackCategory")
   public List<Item> itemsCategory(String category) {
     Item[] temp=restTemplate.getForObject("http://item/category/"+category,Item[].class);
+    
+     Map<String, String> tempprice=restTemplate.getForObject("http://price/prices", Map.class);     
+        for(int i=0;i<temp.length;i++){
+           Long itemid=temp[i].id;
+           String price=tempprice.get(itemid.toString());
+           temp[i].setPrice(price);
+           
+        }
+    
     return Arrays.asList(temp);
   }
   
@@ -53,6 +85,14 @@ public class CommerceService {
        @HystrixCommand(fallbackMethod = "fallbackId")
   public List<Item> itemsById(String id) {
     Item[] temp=restTemplate.getForObject("http://item/item/"+id,Item[].class);
+    
+     Map<String, String> tempprice=restTemplate.getForObject("http://price/prices", Map.class);     
+        for(int i=0;i<temp.length;i++){
+           Long itemid=temp[i].id;
+           String price=tempprice.get(itemid.toString());
+           temp[i].setPrice(price);
+           
+        }
     return Arrays.asList(temp);
   }
   

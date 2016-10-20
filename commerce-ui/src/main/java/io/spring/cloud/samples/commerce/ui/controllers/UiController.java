@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.spring.cloud.samples.commerce.ui.services.fortunes.Item;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
@@ -31,11 +33,21 @@ public class UiController {
         return service.itemsCategory(category);
     }
     
-    
-    
-    @RequestMapping("/test")
-    public String test() {
-        return "Testing";
-    }
+//  @RequestMapping("/prices")
+//    public Map priceCommerce() {
+//        
+//        return service.priceCommerce();
+//    }
+//    
+//   @RequestMapping("/price/{item}")
+//    public Map priceitemCommerce(@PathVariable("item") String itemdId) {
+//        
+//        return service.priceitemCommerce(itemdId);
+//    }
+  
+//    @RequestMapping("/test")
+//    public String test() {
+//        return "Testing";
+//    }
     
 }
