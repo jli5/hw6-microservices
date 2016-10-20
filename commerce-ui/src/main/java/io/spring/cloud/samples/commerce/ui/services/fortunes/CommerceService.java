@@ -47,23 +47,23 @@ public class CommerceService {
         return Arrays.asList(temp);
     }
     
-//     @HystrixCommand(fallbackMethod = "fallbackPrice")
-    public Map priceCommerce() {
-             
-         Map<String, String> tempprice=restTemplate.getForObject("http://price/prices", Map.class);
-        
-        return tempprice;
-    }
-    
-
-   
-//     @HystrixCommand(fallbackMethod = "fallbackPriceItem")
-    
-    public Map priceitemCommerce(String itemdId) {
-    Map<String, String> temppriceitem=restTemplate.getForObject("http://price/price"+itemdId, Map.class);
-    return temppriceitem;
-  }
-    
+////     @HystrixCommand(fallbackMethod = "fallbackPrice")
+//    public Map priceCommerce() {
+//             
+//         Map<String, String> tempprice=restTemplate.getForObject("http://price/prices", Map.class);
+//        
+//        return tempprice;
+//    }
+//    
+//
+//   
+////     @HystrixCommand(fallbackMethod = "fallbackPriceItem")
+//    
+//    public Map priceitemCommerce(String itemdId) {
+//    Map<String, String> temppriceitem=restTemplate.getForObject("http://price/price"+itemdId, Map.class);
+//    return temppriceitem;
+//  }
+//    
     
     
      @HystrixCommand(fallbackMethod = "fallbackCategory")
